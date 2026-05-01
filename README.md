@@ -2,4 +2,7 @@
 
 LLM inferencing based on DeepJavaLibrary 
 
-Default SBERT Implementation based on all-MiniLM-L12-v2
+SBERT Implementations
+- all-MiniLM-L12-v2
+- granite-embedding-english-r2
+- embeddinggemma-300m
