@@ -4,6 +4,8 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
+import ai.djl.translate.TranslateException;
+
 public class AllMiniLM extends SBERT{
 	
 	private static AllMiniLM instant = null;
@@ -23,7 +25,7 @@ public class AllMiniLM extends SBERT{
 	    // Explicitly configure the translator to provide what the model wants
 		mapArgs.put("padding", "true");
 		mapArgs.put("truncation", "true");
-		mapArgs.put("includeTokenTypes", sRtEngine.equalsIgnoreCase("OnnxRuntime")?"true":"false"); // This fixes the 'token_type_ids' mismatch
+		mapArgs.put("includeTokenTypes", "true");
 	    
 		super(sRtEngine, sModelPath, mapArgs);
 	}
@@ -36,5 +38,23 @@ public class AllMiniLM extends SBERT{
 		}
 		return instant;
 	}
+	
+	
+	
+	public static void main(String[] args) throws TranslateException {
+		
+		long lAppStart = System.currentTimeMillis();
+		
+        String s1 = "The weather is very sunny today.";
+        String s2 = "It is a bright and sun-filled day.";
+        
+        AllMiniLM sbert = AllMiniLM.getInstance();
+        
+        long lInferenceStart = System.currentTimeMillis();
+        System.out.println("Similarity Score: " + sbert.calcSimilarityScore(s1, s2));
+        System.out.println("Inference Time = "+(System.currentTimeMillis()-lInferenceStart)+" ms");
+        
+        System.out.println("App Elapsed Time = "+(System.currentTimeMillis()-lAppStart)+" ms");
+    }
 	
 }

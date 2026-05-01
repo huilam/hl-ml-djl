@@ -30,6 +30,10 @@ public class DjlModelLoader {
 		{
 			System.err.println("folder not exist ! - "+folderModel.getAbsolutePath());
 		}
+		else
+		{
+			System.out.println("Loading model from "+folderModel.getAbsolutePath());
+		}
 		
         // In 0.36.0, we use optArgument to pass configuration 
         // and let the ServiceLoader find the translator automatically.
