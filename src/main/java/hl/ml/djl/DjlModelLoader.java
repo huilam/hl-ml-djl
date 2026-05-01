@@ -14,9 +14,15 @@ import java.util.Map;
 
 public class DjlModelLoader {
 	
-	public static Predictor<String, float[]> loadModel(final String aRTEngine, final String aModelPath, final Map<String,Object> aMapArgs)
+	public static Predictor<String, float[]> loadModel(final String aRTEngine, String aModelPath, final Map<String,Object> aMapArgs)
 	{
 		long lStartMs = System.currentTimeMillis();
+		
+		int iPos = aModelPath.indexOf(":");
+		if(iPos>-1)
+		{
+			aModelPath = aModelPath.substring(iPos+1);
+		}
 		
 		Predictor<String, float[]> predictor = null;
 		File folderModel = new File(aModelPath);

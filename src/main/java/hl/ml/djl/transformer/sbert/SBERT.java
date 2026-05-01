@@ -1,5 +1,6 @@
 package hl.ml.djl.transformer.sbert;
 
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -12,13 +13,20 @@ public class SBERT {
 	private static SBERT instant = null;
 	
 	private String rt_engines[]  = new String[]{"OnnxRuntime","PyTorch"};
-	private String model_path = "./src/main/java/hl/ml/djl/transformer/sbert/resources/all-MiniLM-L12-v2/";
+	private String model_name = "all-MiniLM-L12-v2";
     
 	// /src/main/java/hl/ml/djl/transformer/sbert/resources/
 	private Predictor<String, float[]> predictor = null;
 	
 	private SBERT()
 	{
+		URL url = SBERT.class.getProtectionDomain().getCodeSource().getLocation();
+		
+		String sResFolder = url.toString()+SBERT.class.getPackageName().replace(".","/")+"/resources/";
+		String sModelPath = sResFolder+this.model_name;
+		
+		//System.out.println("sModelPath="+sModelPath);
+		
 		String sRtEngine = this.rt_engines[0];
 		
 		Map<String, Object> mapArgs = new HashMap<>();
@@ -27,7 +35,7 @@ public class SBERT {
 		mapArgs.put("truncation", "true");
 		mapArgs.put("includeTokenTypes", sRtEngine.equalsIgnoreCase("OnnxRuntime")?"true":"false"); // This fixes the 'token_type_ids' mismatch
 	    
-		this.predictor= DjlModelLoader.loadModel(this.rt_engines[0], this.model_path, mapArgs);
+		this.predictor= DjlModelLoader.loadModel(this.rt_engines[0], sModelPath, mapArgs);
 	}
 	
 	public static SBERT getInstance()
