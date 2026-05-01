@@ -1,9 +1,9 @@
 package hl.ml.djl.transformer.sbert.dev;
 
 import ai.djl.translate.TranslateException;
-import hl.ml.djl.transformer.sbert.SBERT;
+import hl.ml.djl.transformer.sbert.AllMiniLM;
 
-public class TestSBERT {
+public class TestAllMiniLM {
 	
 	public static void main(String[] args) throws TranslateException {
 		
@@ -12,7 +12,7 @@ public class TestSBERT {
         String s1 = "The weather is very sunny today.";
         String s2 = "It is a bright and sun-filled day.";
         
-        SBERT sbert = SBERT.getInstance();
+        AllMiniLM sbert = AllMiniLM.getInstance();
         
         long lInferenceStart = System.currentTimeMillis();
         System.out.println("Similarity Score: " + sbert.calcSimilarityScore(s1, s2));
