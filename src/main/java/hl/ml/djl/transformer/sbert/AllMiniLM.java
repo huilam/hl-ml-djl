@@ -1,6 +1,5 @@
 package hl.ml.djl.transformer.sbert;
 
-import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 

@@ -16,6 +16,7 @@ public class SBERT {
 	{
 		setModel_name(aModelName);
 		
+		@SuppressWarnings("rawtypes")
 		Class aClass = SBERT.class;
 		URL url = aClass.getProtectionDomain().getCodeSource().getLocation();
 
