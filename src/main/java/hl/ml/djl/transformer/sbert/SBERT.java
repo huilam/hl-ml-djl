@@ -27,10 +27,8 @@ public class SBERT {
     
     public double calcSimilarityScore(String aSentence1, String aSentence2) throws TranslateException
     {
-		double lSimilarityScore = -1;
     	float[] v1 = getEmbedding(aSentence1);
-        lSimilarityScore = calcSimilarityScore(v1, aSentence2);
-        return lSimilarityScore;
+        return calcSimilarityScore(v1, aSentence2);
     }
     
     public double calcSimilarityScore(float[] aEmbedding1, String aSentence2) throws TranslateException
