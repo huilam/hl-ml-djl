@@ -15,10 +15,7 @@ public class AllMiniLM extends SBERT{
     
 	protected AllMiniLM()
 	{
-		URL url = AllMiniLM.class.getProtectionDomain().getCodeSource().getLocation();
-		
-		String sResFolder = url.toString()+AllMiniLM.class.getPackageName().replace(".","/")+"/resources/";
-		String sModelPath = sResFolder+model_names[0];
+		String sModelName = model_names[0];
 		String sRtEngine = rt_engines[0];
 		
 		Map<String, Object> mapArgs = new HashMap<>();
@@ -27,7 +24,7 @@ public class AllMiniLM extends SBERT{
 		mapArgs.put("truncation", "true");
 		mapArgs.put("includeTokenTypes", "true");
 	    
-		super(sRtEngine, sModelPath, mapArgs);
+		super(sRtEngine, sModelName, mapArgs);
 	}
 	
 	public static AllMiniLM getInstance()
@@ -42,19 +39,7 @@ public class AllMiniLM extends SBERT{
 	
 	
 	public static void main(String[] args) throws TranslateException {
-		
-		long lAppStart = System.currentTimeMillis();
-		
-        String s1 = "The weather is very sunny today.";
-        String s2 = "It is a bright and sun-filled day.";
-        
-        AllMiniLM sbert = AllMiniLM.getInstance();
-        
-        long lInferenceStart = System.currentTimeMillis();
-        System.out.println("Similarity Score: " + sbert.calcSimilarityScore(s1, s2));
-        System.out.println("Inference Time = "+(System.currentTimeMillis()-lInferenceStart)+" ms");
-        
-        System.out.println("App Elapsed Time = "+(System.currentTimeMillis()-lAppStart)+" ms");
+		SBERT.unit_test_1( AllMiniLM.getInstance() );
     }
 	
 }
