@@ -1,5 +1,8 @@
 package hl.ml.djl.transformer.sbert;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import ai.djl.inference.Predictor;
 import ai.djl.translate.TranslateException;
 import hl.ml.djl.DjlModelLoader;
@@ -16,7 +19,15 @@ public class SBERT {
 	
 	private SBERT()
 	{
-		this.predictor= DjlModelLoader.loadModel(this.rt_engines[0], this.model_path);
+		String sRtEngine = this.rt_engines[0];
+		
+		Map<String, Object> mapArgs = new HashMap<>();
+	    // Explicitly configure the translator to provide what the model wants
+		mapArgs.put("padding", "true");
+		mapArgs.put("truncation", "true");
+		mapArgs.put("includeTokenTypes", sRtEngine.equalsIgnoreCase("OnnxRuntime")?"true":"false"); // This fixes the 'token_type_ids' mismatch
+	    
+		this.predictor= DjlModelLoader.loadModel(this.rt_engines[0], this.model_path, mapArgs);
 	}
 	
 	public static SBERT getInstance()

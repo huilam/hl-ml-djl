@@ -10,25 +10,19 @@ import ai.djl.repository.zoo.ZooModel;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Map;
 
 public class DjlModelLoader {
 	
-	public static Predictor<String, float[]> loadModel(final String aRTEngine, final String aModelPath)
+	public static Predictor<String, float[]> loadModel(final String aRTEngine, final String aModelPath, final Map<String,Object> aMapArgs)
 	{
 		long lStartMs = System.currentTimeMillis();
 		
+		Predictor<String, float[]> predictor = null;
 		File folderModel = new File(aModelPath);
 		if(!folderModel.exists())
 		{
 			System.err.println("folder not exist ! - "+folderModel.getAbsolutePath());
-		}
-		
-		Predictor<String, float[]> predictor = null;
-		String sIsIncludeTokenTypes = "false";
-		
-		if(aRTEngine.equalsIgnoreCase("OnnxRuntime"))
-		{
-			sIsIncludeTokenTypes = "true";
 		}
 		
         // In 0.36.0, we use optArgument to pass configuration 
@@ -40,13 +34,11 @@ public class DjlModelLoader {
         	    
         	    // FORCE CPU HERE
         	    .optDevice(Device.cpu())
-        	   
-        	    // Explicitly configure the translator to provide what the model wants
-        	    .optArgument("padding", "true")
-        	    .optArgument("truncation", "true")
+        	
+        	    //Optional args
+        	    .optArguments(aMapArgs)
         	    
-        	    // true for onnx
-        	    .optArgument("includeTokenTypes", sIsIncludeTokenTypes) // This fixes the 'token_type_ids' mismatch
+        	    //HuggingFace extension for DJL
         	    .optTranslatorFactory(new TextEmbeddingTranslatorFactory())
         	    .build();
 		
