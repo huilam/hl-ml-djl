@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import ai.djl.translate.TranslateException;
-import hl.ml.djl.CommonConstants;
+import hl.ml.djl.DJLConstants;
 import hl.ml.djl.transformer.sbert.SBERT;
 
 public class AllMiniLM extends SBERT{
@@ -19,7 +19,7 @@ public class AllMiniLM extends SBERT{
 		mapArgs.put("truncation", "true");
 		mapArgs.put("includeTokenTypes", "true");
 	    
-		super(AllMiniLM.class, CommonConstants.RT_ENGINE_ONNX, model_name, mapArgs);
+		super(AllMiniLM.class, DJLConstants.RT_ENGINE_ONNX, model_name, mapArgs);
 	}
 	
 	public static AllMiniLM getInstance()
