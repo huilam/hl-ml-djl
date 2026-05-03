@@ -1,4 +1,4 @@
-package hl.ml.djl.transformer.sbert;
+package hl.ml.djl.transformer.SBERT;
 
 import java.net.URL;
 import java.util.Map;
@@ -7,17 +7,19 @@ import ai.djl.inference.Predictor;
 import ai.djl.translate.TranslateException;
 import hl.ml.djl.DjlModelLoader;
 
-public class SBERT {
+public class BaseSBERT {
 	
 	protected String model_name = null;
+	protected String rt_engine 	= null;
+	
 	protected Predictor<String, float[]> predictor = null;
 	private boolean model_init_ok = false;
-	
 
 	@SuppressWarnings("rawtypes")
-	protected SBERT(Class aImplClass, final String aRtEngine, String aModelName, Map<String, Object> aMapArgs)
+	protected BaseSBERT(Class aImplClass, final String aRtEngine, String aModelName, Map<String, Object> aMapArgs)
 	{
 		setModel_name(aModelName);
+		setRt_engine(aRtEngine);
 		
 		URL url = aImplClass.getProtectionDomain().getCodeSource().getLocation();
 
@@ -30,6 +32,14 @@ public class SBERT {
 	
     public boolean isModelInitOk() {
 		return this.model_init_ok;
+	}
+    
+    public String getRt_engine() {
+		return rt_engine;
+	}
+
+	public void setRt_engine(String rt_engine) {
+		this.rt_engine = rt_engine;
 	}
     
     public String getModel_name() {
@@ -74,7 +84,7 @@ public class SBERT {
     	return predictor.predict(aSentence);
     }
     
-	protected static void unit_test_1(SBERT sbert) throws TranslateException {
+	protected static void unit_test_1(BaseSBERT sbert) throws TranslateException {
 		
 		long lAppStart = System.currentTimeMillis();
 		

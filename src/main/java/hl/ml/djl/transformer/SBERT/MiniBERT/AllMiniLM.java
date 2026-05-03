@@ -1,13 +1,13 @@
-package hl.ml.djl.transformer.sbert.all_minilm;
+package hl.ml.djl.transformer.SBERT.MiniBERT;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import ai.djl.translate.TranslateException;
 import hl.ml.djl.DJLConstants;
-import hl.ml.djl.transformer.sbert.SBERT;
+import hl.ml.djl.transformer.SBERT.BaseSBERT;
 
-public class AllMiniLM extends SBERT{
+public class AllMiniLM extends BaseSBERT{
 	
 	private static AllMiniLM instant = null;
 	private final static String model_name		= "all-MiniLM-L12-v2";
@@ -34,7 +34,7 @@ public class AllMiniLM extends SBERT{
 	
 	
 	public static void main(String[] args) throws TranslateException {
-		SBERT.unit_test_1( AllMiniLM.getInstance() );
+		BaseSBERT.unit_test_1( AllMiniLM.getInstance() );
     }
 	
 }

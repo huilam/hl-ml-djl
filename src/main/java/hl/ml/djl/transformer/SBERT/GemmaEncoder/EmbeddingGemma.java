@@ -1,13 +1,13 @@
-package hl.ml.djl.transformer.sbert.embedding_gemma;
+package hl.ml.djl.transformer.SBERT.GemmaEncoder;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import ai.djl.translate.TranslateException;
 import hl.ml.djl.DJLConstants;
-import hl.ml.djl.transformer.sbert.SBERT;
+import hl.ml.djl.transformer.SBERT.BaseSBERT;
 
-public class EmbeddingGemma extends SBERT{
+public class EmbeddingGemma extends BaseSBERT{
 	
 	private static EmbeddingGemma instant = null;
 	
@@ -34,6 +34,6 @@ public class EmbeddingGemma extends SBERT{
 	}
 	
 	public static void main(String[] args) throws TranslateException {
-		SBERT.unit_test_1( EmbeddingGemma.getInstance() );
+		BaseSBERT.unit_test_1( EmbeddingGemma.getInstance() );
     }
 }
