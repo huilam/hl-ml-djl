@@ -1,29 +1,27 @@
-package hl.ml.djl.transformer.sbert;
+package hl.ml.djl.transformer.sbert.embeddinggemma;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import ai.djl.translate.TranslateException;
+import hl.ml.djl.CommonConstants;
+import hl.ml.djl.transformer.sbert.SBERT;
 
 public class EmbeddingGemma extends SBERT{
 	
 	private static EmbeddingGemma instant = null;
 	
-	private final static String rt_engines[]  = new String[]{"OnnxRuntime","PyTorch"};
-	private final static String model_names[] = new String[]{"embeddinggemma-300m"};
+	private final static String model_name = "embeddinggemma-300m";
     
 	protected EmbeddingGemma()
-	{
-		String sModelName = model_names[0];
-		String sRtEngine = rt_engines[0];
-		
+	{	
 		Map<String, Object> mapArgs = new HashMap<>();
 		mapArgs.put("padding", "true");
 		mapArgs.put("truncation", "true");
 		mapArgs.put("pooling", "mean"); 
 		mapArgs.put("includeTokenTypes", "false"); // Gemma is decoder-only
 		
-		super(sRtEngine, sModelName, mapArgs);
+		super(EmbeddingGemma.class, CommonConstants.RT_ENGINE_ONNX, model_name, mapArgs);
 	}
 	
 	public static EmbeddingGemma getInstance()

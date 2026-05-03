@@ -11,20 +11,27 @@ public class SBERT {
 	
 	protected String model_name = null;
 	protected Predictor<String, float[]> predictor = null;
+	private boolean model_init_ok = false;
 	
-	protected SBERT(final String aRtEngine, String aModelName, Map<String, Object> aMapArgs)
+
+	@SuppressWarnings("rawtypes")
+	protected SBERT(Class aImplClass, final String aRtEngine, String aModelName, Map<String, Object> aMapArgs)
 	{
 		setModel_name(aModelName);
 		
-		@SuppressWarnings("rawtypes")
-		Class aClass = SBERT.class;
-		URL url = aClass.getProtectionDomain().getCodeSource().getLocation();
+		URL url = aImplClass.getProtectionDomain().getCodeSource().getLocation();
 
-		String sResFolder = url.toString()+aClass.getPackageName().replace(".","/")+"/resources/";
-
-		this.predictor = DjlModelLoader.loadModel(aRtEngine, sResFolder + getModel_name(), aMapArgs);
+		String sModelFolder = url.toString()+aImplClass.getPackageName().replace(".","/")+"/model/";
+		
+		this.predictor = DjlModelLoader.loadModel(aRtEngine, sModelFolder + getModel_name(), aMapArgs);
+		
+		this.model_init_ok = true;
 	}
 	
+    public boolean isModelInitOk() {
+		return this.model_init_ok;
+	}
+    
     public String getModel_name() {
 		return model_name;
 	}
