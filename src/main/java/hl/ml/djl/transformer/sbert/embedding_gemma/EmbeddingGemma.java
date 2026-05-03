@@ -1,4 +1,4 @@
-package hl.ml.djl.transformer.sbert.embeddinggemma;
+package hl.ml.djl.transformer.sbert.embedding_gemma;
 
 import java.util.HashMap;
 import java.util.Map;
