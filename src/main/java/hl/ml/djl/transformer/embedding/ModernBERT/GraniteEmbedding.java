@@ -5,9 +5,9 @@ import java.util.Map;
 
 import ai.djl.translate.TranslateException;
 import hl.ml.djl.DJLConstants;
-import hl.ml.djl.transformer.embedding.BaseEmbedding;
+import hl.ml.djl.transformer.embedding.EmbeddingCommon;
 
-public class GraniteEmbedding extends BaseEmbedding{
+public class GraniteEmbedding extends EmbeddingCommon{
 	
 	private static GraniteEmbedding instant = null;
 	private final static String model_name = "granite-embedding-english-r2";
@@ -33,6 +33,6 @@ public class GraniteEmbedding extends BaseEmbedding{
 	}
 	
 	public static void main(String[] args) throws TranslateException {
-		BaseEmbedding.unit_test_1( GraniteEmbedding.getInstance() );
+		EmbeddingCommon.unit_test_1( GraniteEmbedding.getInstance() );
     }
 }

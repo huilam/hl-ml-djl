@@ -1,13 +1,14 @@
 package hl.ml.djl.transformer.embedding;
 
 import java.net.URL;
+import java.util.HashMap;
 import java.util.Map;
 
 import ai.djl.inference.Predictor;
 import ai.djl.translate.TranslateException;
 import hl.ml.djl.DjlModelLoader;
 
-public class BaseEmbedding {
+public class EmbeddingCommon {
 	
 	protected String model_name = null;
 	protected String rt_engine 	= null;
@@ -16,7 +17,7 @@ public class BaseEmbedding {
 	private boolean model_init_ok = false;
 
 	@SuppressWarnings("rawtypes")
-	protected BaseEmbedding(Class aImplClass, final String aRtEngine, String aModelName, Map<String, Object> aMapArgs)
+	protected EmbeddingCommon(Class aImplClass, final String aRtEngine, String aModelName, Map<String, Object> aMapArgs)
 	{
 		setModel_name(aModelName);
 		setRt_engine(aRtEngine);
@@ -84,7 +85,19 @@ public class BaseEmbedding {
     	return predictor.predict(aSentence);
     }
     
-	protected static void unit_test_1(BaseEmbedding embedding) throws TranslateException {
+    public Map<String, float[]> getEmbeddings(final String aSentences[]) throws TranslateException
+    {
+    	Map<String, float[]>  mapEmbeddings = new HashMap<String, float[]>();
+    	
+    	for(int i=0; i<aSentences.length; i++)
+    	{
+    		mapEmbeddings.put(aSentences[i], getEmbedding(aSentences[i]));
+    	}
+    	
+    	return mapEmbeddings;
+    }
+    
+	protected static void unit_test_1(EmbeddingCommon embedding) throws TranslateException {
 		
 		long lAppStart = System.currentTimeMillis();
 		

@@ -5,9 +5,9 @@ import java.util.Map;
 
 import ai.djl.translate.TranslateException;
 import hl.ml.djl.DJLConstants;
-import hl.ml.djl.transformer.embedding.BaseEmbedding;
+import hl.ml.djl.transformer.embedding.EmbeddingCommon;
 
-public class EmbeddingGemma extends BaseEmbedding{
+public class EmbeddingGemma extends EmbeddingCommon{
 	
 	private static EmbeddingGemma instant = null;
 	
@@ -34,6 +34,6 @@ public class EmbeddingGemma extends BaseEmbedding{
 	}
 	
 	public static void main(String[] args) throws TranslateException {
-		BaseEmbedding.unit_test_1( EmbeddingGemma.getInstance() );
+		EmbeddingCommon.unit_test_1( EmbeddingGemma.getInstance() );
     }
 }

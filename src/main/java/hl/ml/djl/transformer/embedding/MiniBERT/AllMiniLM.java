@@ -5,9 +5,9 @@ import java.util.Map;
 
 import ai.djl.translate.TranslateException;
 import hl.ml.djl.DJLConstants;
-import hl.ml.djl.transformer.embedding.BaseEmbedding;
+import hl.ml.djl.transformer.embedding.EmbeddingCommon;
 
-public class AllMiniLM extends BaseEmbedding{
+public class AllMiniLM extends EmbeddingCommon{
 	
 	private static AllMiniLM instant = null;
 	private final static String model_name		= "all-MiniLM-L12-v2";
@@ -34,7 +34,7 @@ public class AllMiniLM extends BaseEmbedding{
 	
 	
 	public static void main(String[] args) throws TranslateException {
-		BaseEmbedding.unit_test_1( AllMiniLM.getInstance() );
+		EmbeddingCommon.unit_test_1( AllMiniLM.getInstance() );
     }
 	
 }
