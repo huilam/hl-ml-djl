@@ -1,4 +1,4 @@
-package hl.ml.djl.transformer.SBERT;
+package hl.ml.djl.transformer.embedding;
 
 import java.net.URL;
 import java.util.Map;
@@ -7,7 +7,7 @@ import ai.djl.inference.Predictor;
 import ai.djl.translate.TranslateException;
 import hl.ml.djl.DjlModelLoader;
 
-public class BaseSBERT {
+public class BaseEmbedding {
 	
 	protected String model_name = null;
 	protected String rt_engine 	= null;
@@ -16,7 +16,7 @@ public class BaseSBERT {
 	private boolean model_init_ok = false;
 
 	@SuppressWarnings("rawtypes")
-	protected BaseSBERT(Class aImplClass, final String aRtEngine, String aModelName, Map<String, Object> aMapArgs)
+	protected BaseEmbedding(Class aImplClass, final String aRtEngine, String aModelName, Map<String, Object> aMapArgs)
 	{
 		setModel_name(aModelName);
 		setRt_engine(aRtEngine);
@@ -84,7 +84,7 @@ public class BaseSBERT {
     	return predictor.predict(aSentence);
     }
     
-	protected static void unit_test_1(BaseSBERT sbert) throws TranslateException {
+	protected static void unit_test_1(BaseEmbedding embedding) throws TranslateException {
 		
 		long lAppStart = System.currentTimeMillis();
 		
@@ -92,8 +92,8 @@ public class BaseSBERT {
         String s2 = "It is a bright and sun-filled day.";
         
         long lInferenceStart = System.currentTimeMillis();
-        System.out.println("Model Name: " + sbert.getModel_name());
-        System.out.println("Similarity Score: " + sbert.calcSimilarityScore(s1, s2));
+        System.out.println("Model Name: " + embedding.getModel_name());
+        System.out.println("Similarity Score: " + embedding.calcSimilarityScore(s1, s2));
         System.out.println("Inference Time = "+(System.currentTimeMillis()-lInferenceStart)+" ms");
         
         System.out.println("App Elapsed Time = "+(System.currentTimeMillis()-lAppStart)+" ms");

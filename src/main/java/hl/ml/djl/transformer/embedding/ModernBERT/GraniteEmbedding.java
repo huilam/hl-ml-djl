@@ -1,13 +1,13 @@
-package hl.ml.djl.transformer.SBERT.ModernBERT;
+package hl.ml.djl.transformer.embedding.ModernBERT;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import ai.djl.translate.TranslateException;
 import hl.ml.djl.DJLConstants;
-import hl.ml.djl.transformer.SBERT.BaseSBERT;
+import hl.ml.djl.transformer.embedding.BaseEmbedding;
 
-public class GraniteEmbedding extends BaseSBERT{
+public class GraniteEmbedding extends BaseEmbedding{
 	
 	private static GraniteEmbedding instant = null;
 	private final static String model_name = "granite-embedding-english-r2";
@@ -33,6 +33,6 @@ public class GraniteEmbedding extends BaseSBERT{
 	}
 	
 	public static void main(String[] args) throws TranslateException {
-		BaseSBERT.unit_test_1( GraniteEmbedding.getInstance() );
+		BaseEmbedding.unit_test_1( GraniteEmbedding.getInstance() );
     }
 }
