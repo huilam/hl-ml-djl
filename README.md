@@ -2,7 +2,7 @@
 
 LLM inferencing based on DeepJavaLibrary 
 
-Sentence Transformers (SBERT) Implementations
-- all-MiniLM-L12-v2
-- granite-embedding-english-r2
-- embeddinggemma-300m
+Embedding Implementations
+- all-MiniLM-L12-v2 (MiniLM / BERT-based)
+- granite-embedding-english-r2 (ModernBERT)
+- embeddinggemma-300m (Gemma 3 / Encoder-adapted)
